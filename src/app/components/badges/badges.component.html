@@ -1,0 +1,11 @@
+<mat-spinner *ngIf="!loaded"></mat-spinner>
+
+<div *ngIf="loaded">
+
+    <div *ngFor="let badge of allBadges;">
+
+    <a routerLink="/badges/{{badge.name}}" [ngClass]="{isDisabled: !badge.available}">{{badge.name}}</a><br>
+
+    </div>
+
+</div>
