@@ -1,11 +1,15 @@
+
 <mat-spinner *ngIf="!loaded"></mat-spinner>
 
-<div *ngIf="loaded">
-
-    <div *ngFor="let badge of allBadges;">
-
-    <a routerLink="/badges/{{badge.name}}" [ngClass]="{isDisabled: !badge.available}">{{badge.name}}</a><br>
-
-    </div>
+<div *ngIf="loaded" id="innerbox">
+    <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
+        <div *ngFor="let badge of allBadges;">
+            <a routerLink="/badges/{{badge.name}}" [ngClass]="{isDisabled: !badge.available}">
+                <mat-grid-tile>
+                    <img class="img-responsive" src="assets/got_images/{{badge.filename}}">
+                </mat-grid-tile>
+            </a>
+        </div>
+    </mat-grid-list>
 
 </div>

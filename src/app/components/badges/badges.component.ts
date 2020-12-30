@@ -14,17 +14,24 @@ export class BadgesComponent implements OnInit {
   allBadges = [
     {
       name : 'popularna',
-      available : true
+      available : true,
+      filename: 'popularna_alpha.png'
   },
-     {name : 'brązowa',
-    available : false},
+     {
+    name : 'brązowa',
+    available : false,
+    filename: 'brązowa_alpha.png'
+  },
+    
     { 
       name: 'srebrna',
-      available : false
+      available : false,
+      filename: 'srebrna_alpha.png'
     },
     {
       name : 'złota',
-      available :  false
+      available :  false,
+      filename: 'złota_alpha.png'
     } 
   ]
 
@@ -41,8 +48,8 @@ export class BadgesComponent implements OnInit {
     }
 
     this.allBadges = this.allBadges.map(b => {
-      if(ranks.includes(b.name)) return {name : b.name, available : true}
-      else return {name : b.name, available : false}
+      if(ranks.includes(b.name)) return {name : b.name, available : true, filename: b.filename}
+      else return {name : b.name, available : false, filename: b.filename}
     })
 
     this.loaded = true
