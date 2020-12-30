@@ -20,3 +20,27 @@ export interface stopien {
     ID : number,
     Nazwa : string
 }
+
+export interface punkt {
+    ID : number,
+    Nazwa : string,
+    Pracownik_PTTK : number,
+    Wysokosc_npm : number
+}
+
+export interface teren {
+    ID : number,
+    Nazwa : string,
+    Pasmo_gorskie : number
+}
+
+export interface odcinek {
+    ID : number,
+    Nazwa : string,
+    PunktPoczatkowy : number,
+    PunktKoncowy : number,
+    Teren : number,
+    Dlugosc : number,
+    Punktacja : number,
+    PunktacjaOdKonca : number
+}

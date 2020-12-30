@@ -1,0 +1,64 @@
+<h1>Dodawanie odcinka</h1>
+
+<mat-spinner *ngIf="!loaded"></mat-spinner>
+
+<div *ngIf="loaded">
+
+<form (ngSubmit)="saveSegment()">
+    <div style="text-align: center;">
+
+      <mat-form-field class="big">
+        <mat-label>Nazwa</mat-label>
+        <input matInput name="name" [(ngModel)]="name">
+      </mat-form-field><br>
+
+      <mat-form-field appearance="fill" class="big">
+          <mat-label>Teren</mat-label>
+      <mat-select [(value)]="selectedArea" (selectionChange)="changeOfArea($event)">
+        <mat-option *ngFor="let area of allAreas" [value]="area">
+          {{area?.Nazwa}}
+        </mat-option>
+      </mat-select>
+      </mat-form-field><br>
+
+      <mat-form-field appearance="fill" class="big">
+        <mat-label>Punkt początkowy</mat-label>
+      <mat-select [(value)]="initialPoint" (selectionChange)="changeOfInitialPoint($event)" [disabled]='allPoints.length < 1'>
+        <mat-option *ngFor="let point of allPoints" [value]="point">
+          {{point?.Nazwa}}
+        </mat-option>
+      </mat-select><br>
+    </mat-form-field><br>
+
+      <mat-form-field appearance="fill" class="big">
+        <mat-label>Punkt końcowy</mat-label>
+      <mat-select [(value)]="boundPoint" [disabled]="boundPoints.length < 1">
+        <mat-option *ngFor="let point of boundPoints" [value]="point">
+          {{point?.Nazwa}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+
+    <mat-form-field class="big">
+        <mat-label>Dlugosc</mat-label>
+        <input matInput type="number" name="length" [(ngModel)]="length">
+      </mat-form-field><br>
+
+      <mat-form-field class="small">
+        <mat-label>Punktacja 1</mat-label>
+        <input matInput type="number" name="points1" [(ngModel)]="points1">
+      </mat-form-field>
+      
+      <mat-form-field class="small">
+        <mat-label>Punktacja 2</mat-label>
+        <input matInput type="number" name="points1" [(ngModel)]="points2">
+      </mat-form-field><br>
+
+      </div>
+</form>
+
+        
+      <button mat-raised-button (click)="saveSegment()">Dodaj</button>
+
+</div>
+  

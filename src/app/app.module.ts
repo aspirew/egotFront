@@ -13,6 +13,12 @@ import routes from './routes'
 import { HttpClientModule } from '@angular/common/http';
 import { BadgesComponent } from './components/badges/badges.component';
 import { BadgeComponent } from './components/badge/badge.component';
+import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
+import { EditSegmentComponent } from './components/employee-dashboard/edit-segment/edit-segment.component';
+import { AddPointComponent } from './components/employee-dashboard/add-point/add-point.component';
+import { EditPointComponent } from './components/employee-dashboard/edit-point/edit-point.component';
+import { AddSegmentComponent } from './components/employee-dashboard/add-segment/add-segment.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,14 +26,20 @@ import { BadgeComponent } from './components/badge/badge.component';
     MainNavComponent,
     MainPageComponent,
     BadgesComponent,
-    BadgeComponent
+    BadgeComponent,
+    EmployeeDashboardComponent,
+    EditSegmentComponent,
+    AddPointComponent,
+    EditPointComponent,
+    AddSegmentComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

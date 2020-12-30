@@ -40,6 +40,10 @@
               <button mat-button (click)="this.router.navigate(['/'])">Twoje trasy</button>
               <button mat-button (click)="this.router.navigate(['/badges'])" style="margin-right: 10px;">Twoje odznaki</button>
             </span>
+            <span class="menu" *ngIf="isLoggedIn && isEmployee">
+              <button mat-button (click)="this.router.navigate(['/'])">Odcinki</button>
+              <button mat-button (click)="this.router.navigate(['/badges'])" style="margin-right: 10px;">Zarządzanie</button>
+            </span>
             <span>
             <button mat-button *ngIf="!isLoggedIn" (click)="this.router.navigate(['/'])">Zaloguj się</button>
             <button mat-button *ngIf="isLoggedIn" [matMenuTriggerFor]="menu">Witaj {{userName}}</button>
