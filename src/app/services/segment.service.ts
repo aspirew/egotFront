@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { odcinek } from '../interfaces';
+import { odcinek, odcinekHR } from '../interfaces';
 
 interface status {
   success : boolean,
@@ -19,7 +19,7 @@ export class SegmentService {
   }
 
   searchForSegment(searchPoints: string, searchName: string){
-    return this.http.post<Array<odcinek>>('/api/segments/search', {points : searchPoints, name : searchName})
+    return this.http.post<Array<odcinekHR>>('/api/segments/search', {points : searchPoints, name : searchName})
   }
 
   editSegment(id: number, segmentData : odcinek){

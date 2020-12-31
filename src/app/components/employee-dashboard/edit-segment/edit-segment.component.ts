@@ -34,12 +34,21 @@ export class EditSegmentComponent implements OnInit {
   
   select(row: odcinek){
     if(this.selectedSegment != row)
-      this.selectedSegment = row
+      this.selectedSegment = row       
     else
       this.selectedSegment = null
+
+    this.name = this.selectedSegment?.Nazwa
+    this.p1 = this.selectedSegment?.Punktacja
+    this.p2 = this.selectedSegment?.PunktacjaOdKonca
   }
 
   async save(){
+
+  if(this.p1 < 1 || this.p2 < 0 || this.name.length < 1){
+    alert("Podano nieprawidłowe dane")
+    return
+  }
     const newSegment : odcinek = {
       ID : null,
       Nazwa : this.name,
