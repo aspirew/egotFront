@@ -8,12 +8,21 @@ import { PointsService } from 'src/app/services/points.service';
 })
 export class AddPointComponent implements OnInit {
 
-  name = ""
-  npm = ""
+  name : string
+  npm : number
 
   constructor(private pointService : PointsService) { }
 
   ngOnInit(): void {
+  }
+
+  async savePoint(){
+    const sure = confirm("Czy na pewno chcesz wykonać tą operację?")
+
+    if(sure){
+      const res = await this.pointService.addPoint(this.name, this.npm).toPromise()
+      alert(res.message)
+    }
   }
 
 }

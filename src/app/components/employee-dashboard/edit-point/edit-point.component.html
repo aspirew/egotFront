@@ -1,1 +1,84 @@
-<p>edit-point works!</p>
+<h1>Edytowanie punktów</h1>
+
+<form>
+    <div class="action-div">
+
+    <div style="float: left; width: 500px">
+      <mat-form-field class="big">
+        <mat-label>Punkty</mat-label>
+        <input matInput name="pointSearch" [(ngModel)]="pointSearch">
+      </mat-form-field><br>
+
+    </div>
+    
+    <div style="float: left;">
+        <button mat-raised-button (click)="search()" class="searchButton">Szukaj</button>
+    </div>  
+
+    <div style="clear: both;"></div>
+
+    </div>
+</form>
+
+<mat-spinner *ngIf="!loaded"></mat-spinner>
+
+<!-- <h2 *ngIf="points.data.length < 1 && loaded">Wyszukaj dane aby otrzymać wyniki</h2> -->
+
+<!-- <div *ngIf="points.data.length > 0 && loaded"> -->
+
+    <div>
+
+<table mat-table [dataSource]="segments" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nazwa punktu </th>
+      <td mat-cell *matCellDef="let res"> {{res.Nazwa}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="npm">
+        <th mat-header-cell *matHeaderCellDef> Wysokość npm </th>
+        <td mat-cell *matCellDef="let res"> {{res.npm}} </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+    *matRowDef="let row; columns: displayedColumns;"
+    class="element-row"
+    [class.expanded]="selectedPoint == row"
+    (click)="select(row)"></tr>
+  </table>
+
+  <div class="action-div">
+
+  <div style ="float: left;">
+  <form>
+    <div style="width: 500px;">
+
+      <mat-form-field class="big">
+        <mat-label>Nazwa</mat-label>
+        <input matInput name="newName" [(ngModel)]="newName">
+      </mat-form-field><br>
+
+      <mat-form-field class="big">
+        <mat-label>Wysokość</mat-label>
+        <input matInput name="npm" [(ngModel)]="npm">
+      </mat-form-field><br>
+      </div>
+</form>
+
+</div>
+
+<div style ="float: left;">
+
+    <button mat-raised-button color="warn" (click)="delete()">Usuń</button><br>
+    <button mat-raised-button color="primary" (click)="save()">Zapisz</button>
+
+</div>
+
+<div style="clear: both;"></div>
+
+</div>
+
+</div>
+
+  

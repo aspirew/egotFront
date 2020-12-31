@@ -52,7 +52,7 @@ export class EditSegmentComponent implements OnInit {
     }
     const sure = confirm("Czy na pewno chcesz wykonać tą akcję?")
     if(sure){
-      const res = await this.segmentService.editSegment(newSegment).toPromise()
+      const res = await this.segmentService.editSegment(this.selectedSegment.ID, newSegment).toPromise()
       alert(res.message)
     }
   }

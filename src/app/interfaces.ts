@@ -1,3 +1,8 @@
+export interface status{
+    success : boolean,
+    message : string
+}
+
 export interface userData{
     isLoggedIn : boolean,
     username : string,

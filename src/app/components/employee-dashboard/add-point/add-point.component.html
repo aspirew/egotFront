@@ -1,1 +1,22 @@
-<p>add-point works!</p>
+<h1>Dadawanie punktu</h1>
+
+<form>
+    <div style="text-align: center;">
+
+      <mat-form-field class="big">
+        <mat-label>Nazwa</mat-label>
+        <input matInput name="name" [(ngModel)]="name">
+      </mat-form-field><br>
+
+      <mat-form-field class="big">
+        <mat-label>Wysokość npm</mat-label>
+        <input matInput name="npm" [(ngModel)]="npm">
+      </mat-form-field><br>
+    
+    </div>
+ </form>
+
+ <button mat-raised-button color="primary" (click)="savePoint()" style="float:right">Dodaj</button>
+ <div style="clear:both"></div>
+
+

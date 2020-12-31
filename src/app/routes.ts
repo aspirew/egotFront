@@ -37,7 +37,7 @@ export default [
         component: AddPointComponent
     },
     {
-        path : 'dasboard/editPoint',
+        path : 'dashboard/editPoint',
         component: EditPointComponent
     }
 ]

@@ -22,8 +22,8 @@ export class SegmentService {
     return this.http.post<Array<odcinek>>('/api/segments/search', {points : searchPoints, name : searchName})
   }
 
-  editSegment(segmentData : odcinek){
-    return this.http.post<status>(`/api/segment/${segmentData.ID}`, segmentData)
+  editSegment(id: number, segmentData : odcinek){
+    return this.http.post<status>(`/api/segment/${id}}`, segmentData)
   }
 
   deleteSegment(segmentID : number){
