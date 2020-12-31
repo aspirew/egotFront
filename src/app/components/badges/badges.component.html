@@ -4,7 +4,7 @@
 
     <div *ngFor="let badge of allBadges;">
 
-    <a routerLink="/badges/{{badge.name}}" [ngClass]="{isDisabled: !badge.available}">{{badge.name}}</a><br>
+        <a routerLink="/badges/{{badge.name}}" [ngClass]="{isDisabled: !badge.available}">{{badge.name}}</a><br>
 
     </div>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,10 +9,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(private userService: UserService) {}
-
-  async ngOnInit() {
-    await this.userService.logUserIn().toPromise()
+  constructor(private userService: UserService, private router : Router) {
+    this.userService.logUserIn().subscribe(res => {
+      if(res.success)
+        router.navigate(['/'])
+    })
   }
+
+  ngOnInit() {}
 
 }
