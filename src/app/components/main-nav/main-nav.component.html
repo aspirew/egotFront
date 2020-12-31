@@ -15,7 +15,7 @@
         </div>
         <div *ngIf="isLoggedIn && isEmployee">
           <a mat-list-item routerLink="#" (click)="drawer.toggle()">Odcinki</a>
-          <a mat-list-item routerLink="#" (click)="drawer.toggle()">Zarządzanie</a>
+          <a mat-list-item routerLink="/dashboard" (click)="drawer.toggle()">Zarządzanie</a>
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="#" (click)="drawer.toggle()">Edytuj konto</a>
           <a mat-list-item routerLink="#" (click)="drawer.toggle()" class="logout-button">Wyloguj</a>
@@ -42,7 +42,7 @@
             </span>
             <span class="menu" *ngIf="isLoggedIn && isEmployee">
               <button mat-button (click)="this.router.navigate(['/'])">Odcinki</button>
-              <button mat-button (click)="this.router.navigate(['/badges'])" style="margin-right: 10px;">Zarządzanie</button>
+              <button mat-button (click)="this.router.navigate(['/dashboard'])" style="margin-right: 10px;">Zarządzanie</button>
             </span>
             <span>
             <button mat-button *ngIf="!isLoggedIn" (click)="this.router.navigate(['/'])">Zaloguj się</button>

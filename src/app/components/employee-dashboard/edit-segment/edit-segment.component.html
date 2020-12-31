@@ -1,1 +1,119 @@
-<p>edit-segment works!</p>
+<h1>Edytowanie odcinków</h1>
+
+<form>
+    <div class="action-div">
+
+    <div style="float: left; width: 500px">
+      <mat-form-field class="big">
+        <mat-label>Punkty</mat-label>
+        <input matInput name="pointSearch" [(ngModel)]="pointSearch">
+      </mat-form-field><br>
+
+      <mat-form-field class="big">
+        <mat-label>Odcinki</mat-label>
+        <input matInput name="segmentSearch" [(ngModel)]="pointSearch">
+      </mat-form-field>
+    
+    </div>
+    
+    <div style="float: left;">
+        <button mat-raised-button (click)="search()" class="searchButton">Szukaj</button>
+    </div>  
+
+    <div style="clear: both;"></div>
+
+
+    </div>
+</form>
+
+<mat-spinner *ngIf="!loaded"></mat-spinner>
+
+<!-- <h2 *ngIf="segments.data.length < 1 && loaded">Wyszukaj dane aby otrzymać wyniki</h2> -->
+
+<!-- <div *ngIf="segments.data.length > 0 && loaded"> -->
+
+    <div>
+
+<table mat-table [dataSource]="segments" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nazwa odcinka </th>
+      <td mat-cell *matCellDef="let res"> {{res.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="begin">
+        <th mat-header-cell *matHeaderCellDef> Punkt początkowy </th>
+        <td mat-cell *matCellDef="let res"> {{res.punktPoczatkowy}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="end">
+        <th mat-header-cell *matHeaderCellDef> Punkt końcowy </th>
+        <td mat-cell *matCellDef="let res"> {{res.punktKoncowy}} </td>
+      </ng-container>
+  
+
+      <ng-container matColumnDef="area">
+        <th mat-header-cell *matHeaderCellDef> Teren </th>
+        <td mat-cell *matCellDef="let res"> {{res.Teren}} </td>
+      </ng-container>
+  
+
+      <ng-container matColumnDef="points">
+        <th mat-header-cell *matHeaderCellDef> Punktacja </th>
+        <td mat-cell *matCellDef="let res"> {{res.punktacja}} / {{res.punktacjaOdKonca}} </td>
+      </ng-container>
+  
+
+      <ng-container matColumnDef="length">
+        <th mat-header-cell *matHeaderCellDef> Długość </th>
+        <td mat-cell *matCellDef="let res"> {{res.Dlugosc}} </td>
+      </ng-container>
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+    *matRowDef="let row; columns: displayedColumns;"
+    class="element-row"
+    [class.expanded]="selectedSegment == row"
+    (click)="select(row)"></tr>
+  </table>
+
+  <div class="action-div">
+
+  <div style ="float: left;">
+  <form>
+    <div style="width: 500px;">
+
+      <mat-form-field class="big">
+        <mat-label>Punkty</mat-label>
+        <input matInput name="name" [(ngModel)]="name">
+      </mat-form-field><br>
+
+      <mat-form-field class="small">
+        <mat-label>Punktacja</mat-label>
+        <input matInput name="p1" [(ngModel)]="p1">
+      </mat-form-field>
+
+      <mat-form-field class="small">
+        <mat-label>Punktacja od końca</mat-label>
+        <input matInput name="p2" [(ngModel)]="p2">
+      </mat-form-field><br>
+      </div>
+</form>
+
+</div>
+
+<div style ="float: left;">
+
+    <button mat-raised-button color="warn" (click)="delete()">Usuń</button><br>
+    <button mat-raised-button color="primary" (click)="save()">Zapisz</button>
+
+</div>
+
+<div style="clear: both;"></div>
+
+</div>
+
+</div>
+
+  

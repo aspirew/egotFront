@@ -29,6 +29,7 @@ export class AddSegmentComponent implements OnInit {
 
   async ngOnInit() {
     this.allAreas = await this.areaService.getAllAreas().toPromise()
+    if(this.allPoints.length == 0) alert("Błąd połączenia z bazą danych")
     this.loaded = true
   }
 
@@ -49,9 +50,6 @@ export class AddSegmentComponent implements OnInit {
   }
 
   async saveSegment(){
-
-    console.log(this.length)
-
     if(this.name == "" || 
     this.initialPoint == null || 
     this.boundPoint == null || 

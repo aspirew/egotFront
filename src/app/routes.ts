@@ -30,7 +30,7 @@ export default [
     },
     {
         path : 'dashboard/editSegment',
-        component : EditPointComponent
+        component : EditSegmentComponent
     },
     {
         path : 'dashboard/addPoint',
