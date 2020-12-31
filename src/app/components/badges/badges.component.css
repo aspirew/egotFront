@@ -4,3 +4,16 @@
     opacity: 0.5;
     text-decoration: none;
   }
+
+  #innerbox
+  {
+    width: 500px;
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .img-resposive
+  {
+    width: 100px;
+    height: 100px;
+  }
