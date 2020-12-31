@@ -19,7 +19,7 @@ export class SegmentService {
   }
 
   searchForSegment(searchPoints: string, searchName: string){
-    return this.http.post<Array<odcinek>>('/api/segments/search', {points : searchPoints, names : searchName})
+    return this.http.post<Array<odcinek>>('/api/segments/search', {points : searchPoints, name : searchName})
   }
 
   editSegment(segmentData : odcinek){

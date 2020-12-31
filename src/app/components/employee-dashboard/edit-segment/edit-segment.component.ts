@@ -40,9 +40,19 @@ export class EditSegmentComponent implements OnInit {
   }
 
   async save(){
+    const newSegment : odcinek = {
+      ID : null,
+      Nazwa : this.name,
+      PunktPoczatkowy : null,
+      PunktKoncowy : null,
+      Teren : null,
+      Dlugosc : null,
+      Punktacja : this.p1,
+      PunktacjaOdKonca : this.p2
+    }
     const sure = confirm("Czy na pewno chcesz wykonać tą akcję?")
     if(sure){
-      const res = await this.segmentService.editSegment(this.selectedSegment).toPromise()
+      const res = await this.segmentService.editSegment(newSegment).toPromise()
       alert(res.message)
     }
   }
