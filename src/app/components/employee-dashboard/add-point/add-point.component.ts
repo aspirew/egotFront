@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PointsService } from 'src/app/services/points.service';
 
 @Component({
   selector: 'app-add-point',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPointComponent implements OnInit {
 
-  constructor() { }
+  name = ""
+  npm = ""
+
+  constructor(private pointService : PointsService) { }
 
   ngOnInit(): void {
   }
