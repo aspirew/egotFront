@@ -26,7 +26,7 @@ export class PointsService {
   }
 
   editPoint(id: number, newPointData : punkt){
-    return this.http.post<status>(`/api/point/${id}`, newPointData)
+    return this.http.post<status>(`/api/point/${id}`, {newPointData})
   }
 
   deletePoint(id : number){
@@ -34,6 +34,6 @@ export class PointsService {
   }
 
   searchForPoints(name : string){
-    return this.http.post<Array<punkt>>('/api/points/search', name)
+    return this.http.post<Array<punkt>>('/api/points/search', {name})
   }
 }

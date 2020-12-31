@@ -28,18 +28,9 @@ export class AddSegmentComponent implements OnInit {
   points2 : number
 
   async ngOnInit() {
+    this.allPoints = await this.pointsService.getAllPoints().toPromise()
     this.allAreas = await this.areaService.getAllAreas().toPromise()
     if(Object.keys(this.allAreas).length === 0 && this.allAreas.constructor === Object) alert("Błąd połączenia z bazą danych")
-    this.loaded = true
-  }
-
-  async changeOfArea(event){
-    this.loaded = false
-    this.allPoints = []
-    this.boundPoints = []
-    this.initialPoint = null
-    this.boundPoint = null
-    this.allPoints = await this.pointsService.getAllPointsInArea(this.selectedArea.ID).toPromise()
     this.loaded = true
   }
 

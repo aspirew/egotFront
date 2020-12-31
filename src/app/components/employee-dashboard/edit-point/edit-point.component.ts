@@ -27,6 +27,7 @@ export class EditPointComponent implements OnInit {
   async search(){
     this.loaded = false
     this.points.data = await this.pointService.searchForPoints(this.pointSearch).toPromise()
+    console.log(this.points.data)
     this.loaded = true
   }
 
@@ -41,6 +42,7 @@ export class EditPointComponent implements OnInit {
     if(sure){
       const res = await this.pointService.editPoint(this.selectedPoint.ID, newPoint).toPromise()
       alert(res.message)
+      this.search()
     }
   }
 
@@ -49,7 +51,18 @@ export class EditPointComponent implements OnInit {
     if(sure){
       const res = await this.pointService.deletePoint(this.selectedPoint.ID).toPromise()
       alert(res.message)
+      this.search()
     }
+  }
+
+  select(row: punkt){
+    if(this.selectedPoint != row)
+      this.selectedPoint = row       
+    else
+      this.selectedPoint = null
+
+    this.newName = this.selectedPoint?.Nazwa
+    this.npm = this.selectedPoint?.Wysokosc_npm
   }
 
 }

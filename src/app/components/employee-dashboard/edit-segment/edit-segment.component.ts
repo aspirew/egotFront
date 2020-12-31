@@ -71,6 +71,7 @@ export class EditSegmentComponent implements OnInit {
     if(sure){
       const res = await this.segmentService.deleteSegment(this.selectedSegment.ID).toPromise()
       alert(res.message)
+      this.search()
     }
   }
 

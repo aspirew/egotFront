@@ -14,7 +14,7 @@
 
       <mat-form-field appearance="fill" class="big">
           <mat-label>Teren</mat-label>
-      <mat-select [(value)]="selectedArea" (selectionChange)="changeOfArea($event)">
+      <mat-select [(value)]="selectedArea">
         <mat-option *ngFor="let area of allAreas" [value]="area">
           {{area?.Nazwa}}
         </mat-option>
