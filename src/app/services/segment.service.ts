@@ -18,9 +18,24 @@ export class SegmentService {
     return this.http.post<status>('/api/segment/add', {newSegment})
   }
 
-  searchForSegment(searchPoints: string, searchName: string){
-    return this.http.post<Array<odcinekHR>>('/api/segments/search', {points : searchPoints, name : searchName})
-  }
+  searchForSegment(
+    name : string,
+    points : string,
+    areaID : number = null,
+    minPoints : number = null,
+    maxPoints : number = null,
+    minLen : number = null,
+    maxLen : number = null){
+      return this.http.post<Array<odcinekHR>>('/api/segments/search', {
+        areaID : areaID,
+        points : points,
+        name : name,
+        minPoints : minPoints,
+        maxPoints : maxPoints,
+        minLen : minLen,
+        maxLen : maxLen
+      })
+    }
 
   editSegment(id: number, segmentData : odcinek){
     return this.http.post<status>(`/api/segment/${id}}`, segmentData)

@@ -14,7 +14,7 @@
           <a mat-list-item routerLink="/" (click)="drawer.toggle()" class="logout-button">Wyloguj</a>
         </div>
         <div *ngIf="isLoggedIn && isEmployee">
-          <a mat-list-item routerLink="/" (click)="drawer.toggle()">Odcinki</a>
+          <a mat-list-item routerLink="segments" (click)="drawer.toggle()">Odcinki</a>
           <a mat-list-item routerLink="/dashboard" (click)="drawer.toggle()">Zarządzanie</a>
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/" (click)="drawer.toggle()">Edytuj konto</a>
@@ -38,6 +38,8 @@
         <mat-icon>bedtime</mat-icon>
         <div [ngClass]="{hidden: (isHandset$ | async)}">
             <span class="menu" *ngIf="isLoggedIn && !isEmployee">
+              <button mat-button (click)="this.router.navigate(['segments'])">Odcinki</button>
+              <button mat-button (click)="this.router.navigate(['/'])">Zaplanuj trasę</button>
               <button mat-button (click)="this.router.navigate(['/'])">Odcinki</button>
               <button mat-button (click)="this.router.navigate(['/route-plan'])">Zaplanuj trasę</button>
               <button mat-button (click)="this.router.navigate(['/'])">Twoje trasy</button>
