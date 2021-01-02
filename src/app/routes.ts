@@ -7,6 +7,7 @@ import { EditSegmentComponent } from "./components/employee-dashboard/edit-segme
 import { EmployeeDashboardComponent } from "./components/employee-dashboard/employee-dashboard.component";
 import { MainPageComponent } from "./components/main-page/main-page.component";
 import { SegmentsComponent } from "./components/segments/segments.component";
+import { RoutePlanComponent } from "./components/route-plan/route-plan.component";
 
 export default [
     {
@@ -44,5 +45,9 @@ export default [
     {
         path: 'segments',
         component: SegmentsComponent
+    },
+    {
+        path : 'route-plan',
+        component : RoutePlanComponent
     }
 ]
