@@ -1,0 +1,137 @@
+<h1>Planowanie trasy</h1>
+
+<div class="spinner" *ngIf="!loaded"><mat-spinner></mat-spinner></div>
+
+<div *ngIf="loaded">
+
+    <div *ngIf="!initialPoint">
+
+        <h2>Wybierz punkt początkowy</h2>
+
+        <table mat-table [dataSource]="points" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nazwa punktu </th>
+            <td mat-cell *matCellDef="let res"> {{res.Nazwa}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="npm">
+                <th mat-header-cell *matHeaderCellDef> Wysokość npm </th>
+                <td mat-cell *matCellDef="let res"> {{res.Wysokosc_npm}} </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsPoints"></tr>
+            <tr mat-row
+            *matRowDef="let row; columns: displayedColumnsPoints;"
+            class="element-row"
+            (click)="selectInitialPoint(row)"></tr>
+
+        </table>
+
+    </div>
+
+    <div *ngIf="initialPoint">
+
+        <h2>Wybierz odcinek</h2>
+
+        <table mat-table [dataSource]="possibleSegments" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nazwa odcinka </th>
+              <td mat-cell *matCellDef="let res"> {{res.Nazwa}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="begin">
+                <th mat-header-cell *matHeaderCellDef> Punkt początkowy </th>
+                <td mat-cell *matCellDef="let res"> {{res.PPNazwa}} </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="end">
+                <th mat-header-cell *matHeaderCellDef> Punkt końcowy </th>
+                <td mat-cell *matCellDef="let res"> {{res.PKNazwa}} </td>
+              </ng-container>
+          
+        
+              <ng-container matColumnDef="area">
+                <th mat-header-cell *matHeaderCellDef> Teren </th>
+                <td mat-cell *matCellDef="let res"> {{res.TerenNazwa}} </td>
+              </ng-container>
+          
+        
+              <ng-container matColumnDef="points">
+                <th mat-header-cell *matHeaderCellDef> Punktacja </th>
+                <td mat-cell *matCellDef="let res"> {{res.Punktacja}} / {{res.PunktacjaOdKonca}} </td>
+              </ng-container>
+          
+        
+              <ng-container matColumnDef="length">
+                <th mat-header-cell *matHeaderCellDef> Długość </th>
+                <td mat-cell *matCellDef="let res"> {{res.Dlugosc}} </td>
+              </ng-container>
+          
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsSegments"></tr>
+            <tr mat-row
+            *matRowDef="let row; columns: displayedColumnsSegments;"
+            class="element-row"
+            (click)="selectSegment(row)"></tr>
+        </table>
+
+          <h2>Aktualna trasa</h2>
+
+        <table mat-table [dataSource]="currentSegments" class="mat-elevation-z8">
+  
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nazwa odcinka </th>
+                <td mat-cell *matCellDef="let res"> {{res.Nazwa}} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="begin">
+                  <th mat-header-cell *matHeaderCellDef> Punkt początkowy </th>
+                  <td mat-cell *matCellDef="let res"> {{res.PPNazwa}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="end">
+                  <th mat-header-cell *matHeaderCellDef> Punkt końcowy </th>
+                  <td mat-cell *matCellDef="let res"> {{res.PKNazwa}} </td>
+                </ng-container>
+            
+          
+                <ng-container matColumnDef="area">
+                  <th mat-header-cell *matHeaderCellDef> Teren </th>
+                  <td mat-cell *matCellDef="let res"> {{res.TerenNazwa}} </td>
+                </ng-container>
+            
+          
+                <ng-container matColumnDef="points">
+                  <th mat-header-cell *matHeaderCellDef> Punktacja </th>
+                  <td mat-cell *matCellDef="let res"> {{res.Punktacja}} / {{res.PunktacjaOdKonca}} </td>
+                </ng-container>
+            
+          
+                <ng-container matColumnDef="length">
+                  <th mat-header-cell *matHeaderCellDef> Długość </th>
+                  <td mat-cell *matCellDef="let res"> {{res.Dlugosc}} </td>
+                </ng-container>
+            
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsSegments"></tr>
+              <tr mat-row
+              *matRowDef="let row; columns: displayedColumnsSegments;"
+              class="element-row"></tr>
+        </table>
+
+        <div style="float: right;">
+
+        <p>Suma punktów : {{sum}}</p>
+
+        <button mat-raised-button color="primary" (click)="save()">Zapisz</button>
+        <button mat-raised-button color="warn" (click)="reset()">Powrót do punktu początkowego</button>
+
+    </div>
+
+    <div style="clear: both;"></div>
+
+    </div>
+
+</div>

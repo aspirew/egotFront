@@ -6,7 +6,7 @@
         <a mat-list-item *ngIf="!isLoggedIn" href="/">Zaloguj się</a>
         <div *ngIf="isLoggedIn && !isEmployee">
           <a mat-list-item routerLink="/" (click)="drawer.toggle()">Odcinki</a>
-          <a mat-list-item routerLink="/" (click)="drawer.toggle()">Zaplanuj trasę</a>
+          <a mat-list-item routerLink="/route-plan" (click)="drawer.toggle()">Zaplanuj trasę</a>
           <a mat-list-item routerLink="/" (click)="drawer.toggle()">Twoje trasy</a>
           <a mat-list-item routerLink="/badges" (click)="drawer.toggle()">Twoje odznaki</a>
           <mat-divider></mat-divider>
@@ -39,7 +39,7 @@
         <div [ngClass]="{hidden: (isHandset$ | async)}">
             <span class="menu" *ngIf="isLoggedIn && !isEmployee">
               <button mat-button (click)="this.router.navigate(['/'])">Odcinki</button>
-              <button mat-button (click)="this.router.navigate(['/'])">Zaplanuj trasę</button>
+              <button mat-button (click)="this.router.navigate(['/route-plan'])">Zaplanuj trasę</button>
               <button mat-button (click)="this.router.navigate(['/'])">Twoje trasy</button>
               <button mat-button (click)="this.router.navigate(['/badges'])" style="margin-right: 10px;">Twoje odznaki</button>
             </span>
