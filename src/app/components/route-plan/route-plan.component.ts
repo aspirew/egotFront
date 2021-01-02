@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { odcinek, odcinekHR, punkt } from 'src/app/interfaces';
 import { PointsService } from 'src/app/services/points.service';
+import { RouteService } from 'src/app/services/route.service';
 import { SegmentService } from 'src/app/services/segment.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class RoutePlanComponent implements OnInit {
   possibleSegments = new MatTableDataSource([])
   currentSegments = new MatTableDataSource([])
 
-  constructor(private pointsService : PointsService, private segmentService : SegmentService) { }
+  constructor(private pointsService : PointsService, private segmentService : SegmentService,
+    private routeService : RouteService) { }
 
   async ngOnInit() {
     this.points.data = await this.pointsService.getAllPoints().toPromise()
@@ -54,6 +56,12 @@ export class RoutePlanComponent implements OnInit {
 
 
     this.loaded = true
+  }
+
+  save(){
+    this.routeService.saveRoute(this.currentSegments.data).subscribe(res => {
+      
+    })
   }
 
 }
