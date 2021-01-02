@@ -89,7 +89,9 @@
 
           <h2>Aktualna trasa</h2>
 
-        <table mat-table [dataSource]="currentSegments" class="mat-elevation-z8">
+        <div class = "mat-elevation-z8">
+
+        <table mat-table [dataSource]="currentSegments">
   
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Nazwa odcinka </th>
@@ -133,24 +135,35 @@
 
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
+        </div>
+
         <div style="text-align: right;">
 
             <p>Suma punktów : {{sum}}</p>
 
         </div>
 
-        <div>
-        <form>
+        <div style="float: right;">
+            
+        <form style="float: left;">
         <mat-form-field>
             <mat-label>Nazwa</mat-label>
             <input matInput name="routeName" [(ngModel)]="routeName">
         </mat-form-field>
         </form>
 
-        <button mat-raised-button color="primary" (click)="save()" [disabled]="currentSegments.data?.length < 1">Zapisz</button>
-        <button mat-raised-button color="warn" (click)="reset()">Powrót do punktu początkowego</button>
+        <div style="float: left; text-align: right;">
 
-    </div>
+            <button mat-raised-button (click)="deleteMostRecent()" [disabled]="currentSegments.data?.length < 1">Usuń ostatni odcinek</button><br>
+            <button mat-raised-button color="primary" (click)="save()" [disabled]="currentSegments.data?.length < 1">Zapisz</button><br>
+            <button mat-raised-button color="warn" (click)="reset()">Powrót do punktu początkowego</button>
+
+        </div>
+
+        <div style="clear:both"></div>
+        </div>
+
+        <div style="clear:both"></div>
 
     </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,7 +25,7 @@ export class RoutePlanComponent implements OnInit {
   currentSegments = new MatTableDataSource<simplePrzejscieOdcinkaExtended>([])
   routeName = ""
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
 
   constructor(private pointsService : PointsService, private segmentService : SegmentService,
     private routeService : RouteService, private _snackBar: MatSnackBar) { }
@@ -36,9 +36,9 @@ export class RoutePlanComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.points.paginator = this.paginator
-    this.possibleSegments.paginator = this.paginator
-    this.currentSegments.paginator = this.paginator
+    this.points.paginator = this.paginator.toArray()[0];
+    this.possibleSegments.paginator = this.paginator.toArray()[1];
+    this.currentSegments.paginator = this.paginator.toArray()[2];
   }
 
   async selectInitialPoint(row : punkt){
@@ -59,6 +59,7 @@ export class RoutePlanComponent implements OnInit {
     this.initialPoint = null
     this.possibleSegments.data = []
     this.currentSegments.data = []
+    this.sum = 0
   }
 
   async selectSegment(row : odcinekHR){
@@ -74,22 +75,39 @@ export class RoutePlanComponent implements OnInit {
     this.currentPointName = this.currentPointName == row.PPNazwa ? row.PKNazwa : row.PPNazwa
     
     setTimeout(() =>{
-      this.currentSegments.paginator = this.paginator;
+      this.currentSegments.paginator = this.paginator.toArray()[2];
     })
 
-    this.possibleSegments.data = await this.segmentService.searchForSegment(this.currentPointName, null).toPromise()
+    this.possibleSegments.data = await this.segmentService.searchForSegment(this.currentPointName, "").toPromise()
     
     this.loaded = true
   }
 
   save(){
     this.routeService.saveRoute(
-      this.currentSegments.data.map(a => JSON.parse(`{"Odcinek" : ${a.Odcinek.ID}, "Od_konca": ${a.Od_konca}}`)), 
+      this.currentSegments.data.map(a => JSON.parse(`{"Odcinek" : ${a.Odcinek.ID}, "Od_konca": ${!a.Od_konca}}`)), 
       this.routeName, 
       this.initialPoint.ID).subscribe(res => {
         this.openSnackBar(res.message, "Zamknij")
         this.reset()
     })
+  }
+
+  deleteMostRecent(){
+
+    this.loaded = false
+
+    const deleted = this.currentSegments.data.pop()
+
+    this.sum -= deleted.Od_konca ? deleted.Odcinek.Punktacja : deleted.Odcinek.PunktacjaOdKonca
+    this.currentPointName = deleted.Od_konca ? deleted.Odcinek.PPNazwa : deleted.Odcinek.PKNazwa 
+
+    setTimeout(() =>{
+      this.currentSegments.paginator = this.paginator.toArray()[2];
+    })
+
+    this.loaded = true
+
   }
 
 }
