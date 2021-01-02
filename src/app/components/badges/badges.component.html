@@ -1,7 +1,9 @@
-<mat-spinner *ngIf="!loaded"></mat-spinner>
+<h1>Odznaki</h1>
+
+<div class="spinner" *ngIf="!loaded"><mat-spinner   ></mat-spinner></div>
 
 <div *ngIf="loaded" id="innerbox">
-    <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
+    <mat-grid-list cols="2" rowHeight="1:1" gutterSize="20px">
         <div *ngFor="let badge of allBadges;">
             <a routerLink="/badges/{{badge.name}}" [ngClass]="{isDisabled: !badge.available}">
                 <mat-grid-tile>

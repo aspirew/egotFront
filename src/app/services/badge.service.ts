@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { odznaka, stopien } from '../interfaces';
+import { badgeWays, odznaka, stopien } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,9 @@ export class BadgeService {
     const availableBadges = await this.getCompletedBadges().toPromise()
     availableBadges.push((await this.getOngoingBadge().toPromise())[0])
     return availableBadges
+  }
+
+  getBadgeWays(id : number) {
+    return this.http.get<Array<badgeWays>>(`/api/badge/${id}/ways`)
   }
 }
