@@ -27,7 +27,10 @@ export class EditSegmentComponent implements OnInit {
 
   async search(){
     this.loaded = false
-    this.segments.data = await this.segmentService.searchForSegment(this.pointSearch, this.segmentSearch).toPromise()
+    this.segments.data = await this.segmentService.searchForSegment(
+      this.segmentSearch,
+      this.pointSearch
+      ).toPromise()
     this.loaded = true
   }
 

@@ -6,6 +6,7 @@ import { EditPointComponent } from "./components/employee-dashboard/edit-point/e
 import { EditSegmentComponent } from "./components/employee-dashboard/edit-segment/edit-segment.component";
 import { EmployeeDashboardComponent } from "./components/employee-dashboard/employee-dashboard.component";
 import { MainPageComponent } from "./components/main-page/main-page.component";
+import { SegmentsComponent } from "./components/segments/segments.component";
 
 export default [
     {
@@ -39,5 +40,9 @@ export default [
     {
         path : 'dashboard/editPoint',
         component: EditPointComponent
+    },
+    {
+        path: 'segments',
+        component: SegmentsComponent
     }
 ]
