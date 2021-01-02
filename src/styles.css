@@ -51,7 +51,6 @@ mat-spinner{
   
   table {
     width: 100%;
-    margin: 20px;
   }
   
   .mat-row {
@@ -88,4 +87,3 @@ mat-spinner{
     background: #ab38ce;
     cursor: pointer;
   }
-  

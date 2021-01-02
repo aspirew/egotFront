@@ -10,3 +10,8 @@ form {
   .searchButton {
       margin-top: 80%;
   }
+
+  .mat-elevation-z8{
+      margin-bottom: 20px;
+      margin-top: 20px;
+  }
