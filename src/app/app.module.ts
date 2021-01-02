@@ -18,7 +18,8 @@ import { EditSegmentComponent } from './components/employee-dashboard/edit-segme
 import { AddPointComponent } from './components/employee-dashboard/add-point/add-point.component';
 import { EditPointComponent } from './components/employee-dashboard/edit-point/edit-point.component';
 import { AddSegmentComponent } from './components/employee-dashboard/add-segment/add-segment.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RoutePlanComponent } from './components/route-plan/route-plan.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     EditSegmentComponent,
     AddPointComponent,
     EditPointComponent,
-    AddSegmentComponent
+    AddSegmentComponent,
+    RoutePlanComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { FormsModule } from '@angular/forms';
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

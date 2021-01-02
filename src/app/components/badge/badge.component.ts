@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { odznaka } from 'src/app/interfaces';
+import { badgeWays, odznaka } from 'src/app/interfaces';
 import { BadgeService } from 'src/app/services/badge.service';
 
 @Component({
@@ -12,18 +13,48 @@ export class BadgeComponent implements OnInit {
 
   loaded = false
   type : string
-  badgeData : odznaka
+  badgeData
+  badgeWays = new MatTableDataSource([])
+  displayedColumns = ['date', 'acquired', 'pointsOverflow']
+  required : number = 0
+  remaining : number = 0
 
   constructor(private route: ActivatedRoute, private badgeService: BadgeService) { 
     this.type = this.route.snapshot.paramMap.get('name');
-    console.log(this.type)
   }
 
   async ngOnInit() {
     this.badgeData = await this.badgeService.getBadge(this.type).toPromise()
     this.badgeData = this.badgeData[0]
-    console.log(this.badgeData)
+    this.badgeWays.data = await this.badgeService.getBadgeWays(this.badgeData.ID).toPromise()
+    this.required = this.badgeData.Punkty_wymagane
+
+    this.badgeWays.data.forEach(d => {
+      this.remaining += parseInt(d.Przyznane)
+    })
+
     this.loaded = true
+
+  }
+
+  get parseZdobyta(){
+    return this.badgeData.Zdobyta == true ? "Zrealizowana" : "Realizowana"
+  }
+
+  parseDate(date : Date){
+    date = new Date(date)
+    let weekDays = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota']
+
+    let months = ['Stycznia', 'Lutego', 'Marca', 'Kwietnia', 'Maja',
+      'Czerwca', 'Lipca', 'Sierpnia', 'Września', 'Października',
+      'Listopada', 'Grudnia']
+
+    let weekDay = weekDays[date.getDay()]
+    let day = date.getDate()
+    let month = months[date.getMonth()]
+    let year = date.getFullYear()
+
+    return weekDay + ' ' + day + ' ' + month + ' ' + year
   }
 
 }
