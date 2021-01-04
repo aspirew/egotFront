@@ -40,10 +40,13 @@ export class BadgesComponent implements OnInit {
   async ngOnInit() {
     this.availableBadges = await this.badgeService.getAvailableBadges()
 
+    if(this.availableBadges[0] == undefined){
+      alert("Jakimś sposobem nie masz żadnych odznak (albo wywaliło serwer). Spróbuj wejść na stronę główną i spróbować ponownie.")
+    }
+
     const ranks = [] 
 
     for (const badge of this.availableBadges){
-      console.log(badge)
       ranks.push((await this.badgeService.getBadgeRank(badge.Stopien).toPromise())[0].Nazwa)
     }
 

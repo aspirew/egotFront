@@ -38,7 +38,7 @@ export class SegmentService {
     }
 
   editSegment(id: number, segmentData : odcinek){
-    return this.http.post<status>(`/api/segment/${id}}`, segmentData)
+    return this.http.post<status>(`/api/segment/${id}`, segmentData)
   }
 
   deleteSegment(segmentID : number){

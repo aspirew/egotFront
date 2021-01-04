@@ -49,8 +49,9 @@
       </div>
 </form>
 
-        
-<button mat-raised-button (click)="search()">Szukaj</button>
+<div style = "text-align: right;">
+    <button mat-raised-button (click)="search()">Szukaj</button>
+</div>
 
 <h2 *ngIf="segments.data.length < 1">Wyszukaj dane aby otrzymać wyniki</h2>
 

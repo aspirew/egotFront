@@ -26,7 +26,7 @@
     </div>
 </form>
 
-<mat-spinner *ngIf="!loaded"></mat-spinner>
+<div class="spinner" *ngIf="!loaded"><mat-spinner></mat-spinner></div>
 
 <h2 *ngIf="segments.data.length < 1 && loaded">Wyszukaj dane aby otrzymać wyniki</h2>
 

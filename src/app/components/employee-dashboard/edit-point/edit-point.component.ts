@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { punkt } from 'src/app/interfaces';
 import { PointsService } from 'src/app/services/points.service';
@@ -18,7 +19,7 @@ export class EditPointComponent implements OnInit {
   selectedPoint : punkt
   pointSearch = ""
 
-  constructor(private pointService: PointsService) { }
+  constructor(private pointService: PointsService, private _snackBar : MatSnackBar) { }
 
   ngOnInit(): void {
     this.loaded = true
@@ -41,7 +42,9 @@ export class EditPointComponent implements OnInit {
     const sure = confirm("Czy na pewno chcesz wykonać tą akcję?")
     if(sure){
       const res = await this.pointService.editPoint(this.selectedPoint.ID, newPoint).toPromise()
-      alert(res.message)
+      this._snackBar.open(res.message, "Zamknij", {
+        duration: 2000,
+      })
       this.search()
     }
   }

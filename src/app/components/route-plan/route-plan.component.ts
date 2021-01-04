@@ -45,7 +45,7 @@ export class RoutePlanComponent implements OnInit {
     this.loaded = false;
     this.initialPoint = row
     this.currentPointName = row.Nazwa
-    this.possibleSegments.data = await this.segmentService.searchForSegment(this.initialPoint.Nazwa, "").toPromise()
+    this.possibleSegments.data = await this.segmentService.searchForSegment("", this.initialPoint.Nazwa).toPromise()
     this.loaded = true;
   }
 
@@ -93,7 +93,7 @@ export class RoutePlanComponent implements OnInit {
     })
   }
 
-  deleteMostRecent(){
+  async deleteMostRecent(){
 
     this.loaded = false
 
@@ -102,9 +102,11 @@ export class RoutePlanComponent implements OnInit {
     this.sum -= deleted.Od_konca ? deleted.Odcinek.Punktacja : deleted.Odcinek.PunktacjaOdKonca
     this.currentPointName = deleted.Od_konca ? deleted.Odcinek.PPNazwa : deleted.Odcinek.PKNazwa 
 
-    setTimeout(() =>{
+    setTimeout(() =>{ 
       this.currentSegments.paginator = this.paginator.toArray()[2];
     })
+
+    this.possibleSegments.data = await this.segmentService.searchForSegment(this.currentPointName, "").toPromise()
 
     this.loaded = true
 

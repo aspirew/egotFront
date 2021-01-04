@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PointsService } from 'src/app/services/points.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class AddPointComponent implements OnInit {
   name : string
   npm : number
 
-  constructor(private pointService : PointsService) { }
+  constructor(private pointService : PointsService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -21,7 +22,9 @@ export class AddPointComponent implements OnInit {
 
     if(sure){
       const res = await this.pointService.addPoint(this.name, this.npm).toPromise()
-      alert(res.message)
+        this._snackBar.open(res.message, "Zamknij", {
+          duration: 2000,
+        })
     }
   }
 

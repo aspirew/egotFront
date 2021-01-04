@@ -17,7 +17,7 @@ export class BadgeComponent implements OnInit {
   badgeWays = new MatTableDataSource([])
   displayedColumns = ['date', 'acquired', 'pointsOverflow']
   required : number = 0
-  remaining : number = 0
+  sum : number = 0
 
   constructor(private route: ActivatedRoute, private badgeService: BadgeService) { 
     this.type = this.route.snapshot.paramMap.get('name');
@@ -29,12 +29,16 @@ export class BadgeComponent implements OnInit {
     this.badgeWays.data = await this.badgeService.getBadgeWays(this.badgeData.ID).toPromise()
     this.required = this.badgeData.Punkty_wymagane
 
-    this.badgeWays.data.forEach(d => {
-      this.remaining += parseInt(d.Przyznane)
-    })
+    this.sumPoints()
 
     this.loaded = true
 
+  }
+
+  sumPoints(){
+    this.badgeWays.data.forEach(d => {
+      this.sum += parseInt(d.Przyznane)
+    })
   }
 
   get parseZdobyta(){

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { FormControl } from '@angular/forms';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-main-nav',
@@ -33,7 +34,8 @@ export class MainNavComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,
     private userService: UserService,
     public router: Router,
-    private overlay: OverlayContainer
+    private overlay: OverlayContainer,
+    private _snackBar : MatSnackBar
     ) { }
 
     ngOnInit(){
@@ -49,12 +51,19 @@ export class MainNavComponent implements OnInit {
     }
 
     async checkLoginState(event){
-      const user = await this.userService.getData().toPromise()
 
-      console.log(user)
+      let user
+      try{
+        user = await this.userService.getData().toPromise()
+      }
+      catch {
+        this._snackBar.open("Błąd połączenia z serwerem - dla poprawnego działania należy odświeżyć stronę", "Zamknij", {
+          duration: 2000,
+        })
+      }
 
       if(user.isLoggedIn){
-          this.userName = user.username
+          this.userName = user.name
           this.isLoggedIn = true
           this.isEmployee = user.isEmployee
         }

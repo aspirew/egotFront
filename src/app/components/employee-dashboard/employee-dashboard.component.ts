@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,15 +10,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EmployeeDashboardComponent implements OnInit {
 
-  constructor(public router : Router, private user : UserService) {
+  constructor(public router : Router, private user : UserService, private _snackBar : MatSnackBar) {
     this.user.logEmployeeIn().subscribe(res => {
       if(res.success)
         this.router.navigate(['/dashboard'])
       else
-        alert("couldnt log in")
+        this._snackBar.open("Nie można się zalogować", "Zamknij", {
+          duration: 2000,
+        })
     })
   }
 
-  async ngOnInit() {}
+  ngOnInit() {}
 
 }

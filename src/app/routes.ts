@@ -8,6 +8,8 @@ import { EmployeeDashboardComponent } from "./components/employee-dashboard/empl
 import { MainPageComponent } from "./components/main-page/main-page.component";
 import { SegmentsComponent } from "./components/segments/segments.component";
 import { RoutePlanComponent } from "./components/route-plan/route-plan.component";
+import { LoginComponent } from "./components/login/login.component";
+
 
 export default [
     {
@@ -49,5 +51,9 @@ export default [
     {
         path : 'route-plan',
         component : RoutePlanComponent
+    },
+    {
+        path : 'login',
+        component : LoginComponent
     }
 ]

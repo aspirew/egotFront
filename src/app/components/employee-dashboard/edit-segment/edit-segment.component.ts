@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { odcinek } from 'src/app/interfaces';
 import { SegmentService } from 'src/app/services/segment.service';
@@ -21,7 +22,7 @@ export class EditSegmentComponent implements OnInit {
   p2 : number
 
 
-  constructor(private segmentService : SegmentService) { }
+  constructor(private segmentService : SegmentService, private _snackBar : MatSnackBar) { }
 
   ngOnInit() { }
 
@@ -46,10 +47,16 @@ export class EditSegmentComponent implements OnInit {
     this.p2 = this.selectedSegment?.PunktacjaOdKonca
   }
 
+  openSnackBar(message){
+    this._snackBar.open(message, "Zamknij", {
+      duration: 2000,
+    })
+  }
+
   async save(){
 
   if(this.p1 < 1 || this.p2 < 0 || this.name.length < 1){
-    alert("Podano nieprawidłowe dane")
+    this.openSnackBar("Podano nieprawidłowe dane!")
     return
   }
     const newSegment : odcinek = {
@@ -65,7 +72,7 @@ export class EditSegmentComponent implements OnInit {
     const sure = confirm("Czy na pewno chcesz wykonać tą akcję?")
     if(sure){
       const res = await this.segmentService.editSegment(this.selectedSegment.ID, newSegment).toPromise()
-      alert(res.message)
+      this.openSnackBar(res.message)
     }
   }
 
@@ -73,7 +80,7 @@ export class EditSegmentComponent implements OnInit {
     const sure = confirm("Czy na pewno chcesz wykonać tą akcję?")
     if(sure){
       const res = await this.segmentService.deleteSegment(this.selectedSegment.ID).toPromise()
-      alert(res.message)
+      this.openSnackBar(res.message)
       this.search()
     }
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { odcinek, punkt, teren } from 'src/app/interfaces';
 import { AreasService } from 'src/app/services/areas.service';
 import { PointsService } from 'src/app/services/points.service';
@@ -13,7 +14,8 @@ export class AddSegmentComponent implements OnInit {
 
   constructor(private pointsService : PointsService, 
     private areaService : AreasService, 
-    private segmentService : SegmentService) { }
+    private segmentService : SegmentService,
+    private _snackBar : MatSnackBar) { }
 
   loaded = false
   name = ""
@@ -34,6 +36,12 @@ export class AddSegmentComponent implements OnInit {
     this.loaded = true
   }
 
+  openSnackBar(message){
+    this._snackBar.open(message, "Zamknij", {
+      duration: 2000,
+    })
+  }
+
   async changeOfInitialPoint(event){
     this.boundPoints = []
     this.boundPoint = null
@@ -48,7 +56,7 @@ export class AddSegmentComponent implements OnInit {
     this.length == undefined || 
     this.points1 == undefined ||
     this.points2 == undefined){
-      alert("Niektóre pola nie są wypełnione")
+      this.openSnackBar("Niektóre pola nie są wypełnione")
       return
     }
 
@@ -68,7 +76,7 @@ export class AddSegmentComponent implements OnInit {
       }  
 
       const add = await this.segmentService.addNewSegment(newSegment).toPromise()
-      alert(add.message)
+      this.openSnackBar(add.message)
 
   }
 

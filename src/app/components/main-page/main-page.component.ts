@@ -9,12 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(private userService: UserService, private router : Router) {
-    this.userService.logUserIn().subscribe(res => {
-      if(res.success)
-        router.navigate(['/'])
-    })
-  }
+  constructor() {}
 
   ngOnInit() {}
 

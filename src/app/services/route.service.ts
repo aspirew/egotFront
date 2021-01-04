@@ -10,9 +10,6 @@ export class RouteService {
   constructor(private http : HttpClient) { }
 
   saveRoute(route : Array<simplePrzejscieOdcinka>, routeName : string, initialPoint : number){
-    console.log(route)
-    console.log(routeName)
-    console.log(initialPoint)
     return this.http.post<status>('/api/route/save', {route, routeName, initialPoint})
   }
 

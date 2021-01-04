@@ -2,11 +2,11 @@
 
 <div *ngIf="loaded">
 
-    <h3>{{remaining}} / {{required}}</h3>
+    <h3>{{sum}} / {{required}}</h3>
 
     <h1>Odznaka {{type}}</h1>
 
-    <p> Brakuje ci: {{ remaining < required ? required - remaining : 0 }} </p> 
+    <p> Brakuje ci: {{ sum < required ? required - sum : 0 }} </p> 
 
     <table mat-table [dataSource]="badgeWays" class="mat-elevation-z8">
 
@@ -31,6 +31,6 @@
         class="element-row"></tr>
       </table>
 
-      <h3>Status : {{parseZdobyta}}</h3>
+      <h3 style="padding: 20px;">Status : {{parseZdobyta}}</h3>
 
 </div>
