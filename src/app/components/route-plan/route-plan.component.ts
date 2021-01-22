@@ -20,6 +20,7 @@ export class RoutePlanComponent implements OnInit {
   loaded = false
   displayedColumnsPoints = ['name', 'npm']
   displayedColumnsSegments = ['name', 'begin', 'end', 'area', 'points', 'length']
+  displayedColumnsPickedSegments = ['name', 'begin', 'end', 'direction', 'area', 'points', 'length']
   sum = 0
   possibleSegments = new MatTableDataSource<odcinekHR>([])
   currentSegments = new MatTableDataSource<simplePrzejscieOdcinkaExtended>([])
@@ -65,28 +66,26 @@ export class RoutePlanComponent implements OnInit {
   async selectSegment(row : odcinekHR){
     this.loaded = false
 
-    console.log(this.currentSegments.data?.filter(e => e.Odcinek.ID == row.ID && e.Od_konca == (this.currentPointName == row.PPNazwa))?.length)
-
     if(this.currentSegments.data?.filter(e => e.Odcinek.ID == row.ID && e.Od_konca == (this.currentPointName == row.PPNazwa))?.length < 1)
        this.sum += this.currentPointName == row.PPNazwa ? row.Punktacja : row.PunktacjaOdKonca
 
     this.currentSegments.data.push({Odcinek : row, Od_konca : this.currentPointName == row.PPNazwa})
 
     this.currentPointName = this.currentPointName == row.PPNazwa ? row.PKNazwa : row.PPNazwa
-    
+
     setTimeout(() =>{
       this.currentSegments.paginator = this.paginator.toArray()[2];
     })
 
-    this.possibleSegments.data = await this.segmentService.searchForSegment(this.currentPointName, "").toPromise()
-    
+    this.possibleSegments.data = await this.segmentService.searchForSegment("", this.currentPointName).toPromise()
+
     this.loaded = true
   }
 
   save(){
     this.routeService.saveRoute(
-      this.currentSegments.data.map(a => JSON.parse(`{"Odcinek" : ${a.Odcinek.ID}, "Od_konca": ${!a.Od_konca}}`)), 
-      this.routeName, 
+      this.currentSegments.data.map(a => JSON.parse(`{"Odcinek" : ${a.Odcinek.ID}, "Od_konca": ${!a.Od_konca}}`)),
+      this.routeName,
       this.initialPoint.ID).subscribe(res => {
         this.openSnackBar(res.message, "Zamknij")
         this.reset()
@@ -100,9 +99,9 @@ export class RoutePlanComponent implements OnInit {
     const deleted = this.currentSegments.data.pop()
 
     this.sum -= deleted.Od_konca ? deleted.Odcinek.Punktacja : deleted.Odcinek.PunktacjaOdKonca
-    this.currentPointName = deleted.Od_konca ? deleted.Odcinek.PPNazwa : deleted.Odcinek.PKNazwa 
+    this.currentPointName = deleted.Od_konca ? deleted.Odcinek.PPNazwa : deleted.Odcinek.PKNazwa
 
-    setTimeout(() =>{ 
+    setTimeout(() =>{
       this.currentSegments.paginator = this.paginator.toArray()[2];
     })
 

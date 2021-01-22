@@ -7,18 +7,19 @@
       <mat-form-field class="big">
         <mat-label>Punkty</mat-label>
         <input matInput name="pointSearch" [(ngModel)]="pointSearch">
+        <mat-hint>Punkty oddziel przecinkami</mat-hint>
       </mat-form-field><br>
 
       <mat-form-field class="big">
         <mat-label>Odcinki</mat-label>
         <input matInput name="segmentSearch" [(ngModel)]="segmentSearch">
       </mat-form-field>
-    
+
     </div>
-    
+
     <div style="float: left;">
         <button mat-raised-button (click)="search()" class="searchButton">Szukaj</button>
-    </div>  
+    </div>
 
     <div style="clear: both;"></div>
 
@@ -48,26 +49,26 @@
         <th mat-header-cell *matHeaderCellDef> Punkt końcowy </th>
         <td mat-cell *matCellDef="let res"> {{res.PKNazwa}} </td>
       </ng-container>
-  
+
 
       <ng-container matColumnDef="area">
         <th mat-header-cell *matHeaderCellDef> Teren </th>
         <td mat-cell *matCellDef="let res"> {{res.TerenNazwa}} </td>
       </ng-container>
-  
+
 
       <ng-container matColumnDef="points">
         <th mat-header-cell *matHeaderCellDef> Punktacja </th>
         <td mat-cell *matCellDef="let res"> {{res.Punktacja}} / {{res.PunktacjaOdKonca}} </td>
       </ng-container>
-  
+
 
       <ng-container matColumnDef="length">
         <th mat-header-cell *matHeaderCellDef> Długość </th>
         <td mat-cell *matCellDef="let res"> {{res.Dlugosc}} </td>
       </ng-container>
-  
-  
+
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row
     *matRowDef="let row; columns: displayedColumns;"
@@ -114,4 +115,3 @@
 
 </div>
 
-  

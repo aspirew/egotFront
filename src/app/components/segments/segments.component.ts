@@ -16,7 +16,7 @@ export class SegmentsComponent implements OnInit {
   selectedArea : teren
   points = ""
   pointsMin : number
-  poinstMax : number
+  pointsMax : number
   lengthMin : number
   lengthMax : number
   segments = new MatTableDataSource([])
@@ -32,8 +32,8 @@ export class SegmentsComponent implements OnInit {
 
   async search(){
     this.loaded = false;
-    this.segments.data = await this.segmentService.searchForSegment(this.name, this.points, this.selectedArea?.ID, this.pointsMin, 
-      this.poinstMax, this.lengthMin, this.lengthMax).toPromise()
+    this.segments.data = await this.segmentService.searchForSegment(this.name, this.points, this.selectedArea?.ID, this.pointsMin,
+      this.pointsMax, this.lengthMin, this.lengthMax).toPromise()
     this.loaded = true;
   }
 
