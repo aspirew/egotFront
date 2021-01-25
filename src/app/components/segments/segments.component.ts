@@ -12,7 +12,7 @@ import { SegmentService } from 'src/app/services/segment.service';
 export class SegmentsComponent implements OnInit {
 
   name = ""
-  areas : Array<teren> = []
+  areas : Array<teren> = [undefined]
   selectedArea : teren
   points = ""
   pointsMin : number
@@ -26,7 +26,7 @@ export class SegmentsComponent implements OnInit {
   constructor(private areaService : AreasService, private segmentService : SegmentService) { }
 
   async ngOnInit() {
-    this.areas = await this.areaService.getAllAreas().toPromise()
+    this.areas.push(...await this.areaService.getAllAreas().toPromise())
     this.loaded = true
   }
 

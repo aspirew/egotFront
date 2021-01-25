@@ -35,10 +35,10 @@ export class EditSegmentComponent implements OnInit {
     this.loaded = true
   }
 
-  
+
   select(row: odcinek){
     if(this.selectedSegment != row)
-      this.selectedSegment = row       
+      this.selectedSegment = row
     else
       this.selectedSegment = null
 
@@ -53,9 +53,13 @@ export class EditSegmentComponent implements OnInit {
     })
   }
 
+  checkDataIsValid(){
+    return (this.p1 > 0 && this.p2 > 0 && this.name.length > 0)
+  }
+
   async save(){
 
-  if(this.p1 < 1 || this.p2 < 0 || this.name.length < 1){
+  if(!this.checkDataIsValid()){
     this.openSnackBar("Podano nieprawidłowe dane!")
     return
   }

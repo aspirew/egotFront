@@ -69,7 +69,7 @@
 <div style ="float: left;">
 
     <button mat-raised-button color="warn" (click)="delete()">Usuń</button><br>
-    <button mat-raised-button color="primary" (click)="save()">Zapisz</button>
+    <button mat-raised-button color="primary" [disabled]="!checkDataIsValid()" (click)="save()">Zapisz</button>
 
 </div>
 

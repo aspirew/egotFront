@@ -8,6 +8,7 @@
             <a routerLink="/badges/{{badge.name}}" [ngClass]="{isDisabled: !badge.available}">
                 <mat-grid-tile>
                     <img class="img-responsive" src="assets/got_images/{{badge.filename}}">
+                    <mat-grid-tile-footer>{{badge.name}}</mat-grid-tile-footer>
                 </mat-grid-tile>
             </a>
         </div>

@@ -12,16 +12,16 @@ import { SegmentService } from 'src/app/services/segment.service';
 })
 export class AddSegmentComponent implements OnInit {
 
-  constructor(private pointsService : PointsService, 
-    private areaService : AreasService, 
+  constructor(private pointsService : PointsService,
+    private areaService : AreasService,
     private segmentService : SegmentService,
     private _snackBar : MatSnackBar) { }
 
   loaded = false
   name = ""
-  allPoints : Array<punkt> = []
-  boundPoints : Array<punkt> = []
-  allAreas : Array<teren> = []
+  allPoints : Array<punkt> = [undefined]
+  boundPoints : Array<punkt> = [undefined]
+  allAreas : Array<teren> = [undefined]
   initialPoint : punkt
   boundPoint : punkt
   selectedArea : teren
@@ -30,8 +30,8 @@ export class AddSegmentComponent implements OnInit {
   points2 : number
 
   async ngOnInit() {
-    this.allPoints = await this.pointsService.getAllPoints().toPromise()
-    this.allAreas = await this.areaService.getAllAreas().toPromise()
+    this.allPoints.push(...await this.pointsService.getAllPoints().toPromise())
+    this.allAreas.push(...await this.areaService.getAllAreas().toPromise())
     if(Object.keys(this.allAreas).length === 0 && this.allAreas.constructor === Object) alert("Błąd połączenia z bazą danych")
     this.loaded = true
   }
@@ -45,18 +45,33 @@ export class AddSegmentComponent implements OnInit {
   async changeOfInitialPoint(event){
     this.boundPoints = []
     this.boundPoint = null
-    this.boundPoints = this.allPoints.filter(e => e != this.initialPoint)
+    this.boundPoints.push(...this.allPoints.filter(e => e != this.initialPoint))
+  }
+
+  checkDataIsFilled(){
+    return !(this.name == "" ||
+    this.initialPoint == null ||
+    this.boundPoint == null ||
+    this.selectedArea == null ||
+    this.length == undefined ||
+    this.points1 == undefined ||
+    this.points2 == undefined)
+  }
+
+  checkDataIsValid(){
+    return (this.length > 0 &&
+    this.points1 > 0 &&
+    this.points2 > 0)
   }
 
   async saveSegment(){
-    if(this.name == "" || 
-    this.initialPoint == null || 
-    this.boundPoint == null || 
-    this.selectedArea == null || 
-    this.length == undefined || 
-    this.points1 == undefined ||
-    this.points2 == undefined){
+    if(!this.checkDataIsFilled){
       this.openSnackBar("Niektóre pola nie są wypełnione")
+      return
+    }
+
+    if(!this.checkDataIsValid){
+      this.openSnackBar("Niewłaściwe wartości")
       return
     }
 
@@ -73,7 +88,7 @@ export class AddSegmentComponent implements OnInit {
         Dlugosc : this.length,
         Punktacja : this.points1,
         PunktacjaOdKonca : this.points2
-      }  
+      }
 
       const add = await this.segmentService.addNewSegment(newSegment).toPromise()
       this.openSnackBar(add.message)

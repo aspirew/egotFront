@@ -9,12 +9,16 @@ import { PointsService } from 'src/app/services/points.service';
 })
 export class AddPointComponent implements OnInit {
 
-  name : string
+  name : string = ""
   npm : number
 
   constructor(private pointService : PointsService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+  }
+
+  checkDataIsValid(){
+    return this.name.length > 0
   }
 
   async savePoint(){

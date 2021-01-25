@@ -58,9 +58,13 @@ export class EditPointComponent implements OnInit {
     }
   }
 
+  checkDataIsValid(){
+    return (this.newName != "" && this.npm != undefined)
+  }
+
   select(row: punkt){
     if(this.selectedPoint != row)
-      this.selectedPoint = row       
+      this.selectedPoint = row
     else
       this.selectedPoint = null
 

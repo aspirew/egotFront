@@ -12,11 +12,11 @@
         <mat-label>Wysokość npm</mat-label>
         <input matInput name="npm" type="number" [(ngModel)]="npm">
       </mat-form-field><br>
-    
+
     </div>
  </form>
 
- <button mat-raised-button color="primary" (click)="savePoint()" style="float:right">Dodaj</button>
+ <button mat-raised-button color="primary" [disabled]="!checkDataIsValid()" (click)="savePoint()" style="float:right">Dodaj</button>
  <div style="clear:both"></div>
 
 
