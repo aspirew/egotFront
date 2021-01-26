@@ -33,7 +33,7 @@
 
 <div *ngIf="segments.data.length > 0 && loaded">
 
-<table mat-table [dataSource]="segments" class="mat-elevation-z8">
+<table name="odcinki" mat-table [dataSource]="segments" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Nazwa odcinka </th>
@@ -72,6 +72,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row
     *matRowDef="let row; columns: displayedColumns;"
+    name=""
     class="element-row"
     [class.expanded]="selectedSegment == row"
     (click)="select(row)"></tr>
@@ -84,18 +85,18 @@
     <div style="width: 500px;">
 
       <mat-form-field class="big">
-        <mat-label>Punkty</mat-label>
-        <input matInput name="name" [(ngModel)]="name">
+        <mat-label>Nazwa</mat-label>
+        <input matInput id="nameField" name="name" [(ngModel)]="name">
       </mat-form-field><br>
 
       <mat-form-field class="small">
         <mat-label>Punktacja</mat-label>
-        <input matInput name="p1" [(ngModel)]="p1">
+        <input matInput type="number" name="p1" [(ngModel)]="p1">
       </mat-form-field>
 
       <mat-form-field class="small">
         <mat-label>Punktacja od końca</mat-label>
-        <input matInput name="p2" [(ngModel)]="p2">
+        <input matInput type="number" name="p2" [(ngModel)]="p2">
       </mat-form-field><br>
       </div>
 </form>

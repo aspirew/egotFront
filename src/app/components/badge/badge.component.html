@@ -2,11 +2,11 @@
 
 <div *ngIf="loaded">
 
-    <h3>{{sum}} / {{required}}</h3>
+    <h3><span name="pointsSum">{{sum}}</span> / {{required}}</h3>
 
-    <h1>Odznaka {{type}}</h1>
+    <h1 name="header">Odznaka {{type}}</h1>
 
-    <p> Brakuje ci: {{ sum < required ? required - sum : 0 }} </p> 
+    <p> Brakuje ci: {{ sum < required ? required - sum : 0 }} </p>
 
     <table mat-table [dataSource]="badgeWays" class="mat-elevation-z8">
 
@@ -14,7 +14,7 @@
           <th mat-header-cell *matHeaderCellDef> Data </th>
           <td mat-cell *matCellDef="let res"> {{parseDate(res.Data)}} </td>
         </ng-container>
-    
+
         <ng-container matColumnDef="acquired">
             <th mat-header-cell *matHeaderCellDef> Zdobyte punkty </th>
             <td mat-cell *matCellDef="let res"> {{res.Zdobyte}} </td>
@@ -24,7 +24,7 @@
             <th mat-header-cell *matHeaderCellDef> Nadmiar punktów </th>
             <td mat-cell *matCellDef="let res"> {{res.Nadmiar}} </td>
         </ng-container>
-      
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row
         *matRowDef="let row; columns: displayedColumns;"

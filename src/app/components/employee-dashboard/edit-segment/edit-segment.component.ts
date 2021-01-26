@@ -49,12 +49,12 @@ export class EditSegmentComponent implements OnInit {
 
   openSnackBar(message){
     this._snackBar.open(message, "Zamknij", {
-      duration: 2000,
+      duration: 3000,
     })
   }
 
   checkDataIsValid(){
-    return (this.p1 > 0 && this.p2 > 0 && this.name.length > 0)
+    return (this.p1 > 0 && this.p2 >= 0 && this.name.length > 0 && this.selectedSegment != null)
   }
 
   async save(){
@@ -76,7 +76,9 @@ export class EditSegmentComponent implements OnInit {
     const sure = confirm("Czy na pewno chcesz wykonać tą akcję?")
     if(sure){
       const res = await this.segmentService.editSegment(this.selectedSegment.ID, newSegment).toPromise()
-      this.openSnackBar(res.message)
+      //this.openSnackBar(res.message)
+      alert(res.message)
+      this.search()
     }
   }
 

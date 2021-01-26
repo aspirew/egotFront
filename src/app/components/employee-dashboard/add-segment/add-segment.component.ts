@@ -54,14 +54,13 @@ export class AddSegmentComponent implements OnInit {
     this.boundPoint == null ||
     this.selectedArea == null ||
     this.length == undefined ||
-    this.points1 == undefined ||
-    this.points2 == undefined)
+    this.points1 == undefined)
   }
 
   checkDataIsValid(){
     return (this.length > 0 &&
     this.points1 > 0 &&
-    this.points2 > 0)
+    this.points2 >= 0)
   }
 
   async saveSegment(){

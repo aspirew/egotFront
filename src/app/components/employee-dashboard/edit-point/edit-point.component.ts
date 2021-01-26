@@ -59,7 +59,7 @@ export class EditPointComponent implements OnInit {
   }
 
   checkDataIsValid(){
-    return (this.newName != "" && this.npm != undefined)
+    return (this.newName != "" && this.npm != undefined && this.selectedPoint != null)
   }
 
   select(row: punkt){

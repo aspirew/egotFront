@@ -98,14 +98,16 @@ export class RoutePlanComponent implements OnInit {
 
     const deleted = this.currentSegments.data.pop()
 
-    this.sum -= deleted.Od_konca ? deleted.Odcinek.Punktacja : deleted.Odcinek.PunktacjaOdKonca
+    if(this.currentSegments.data.filter(e => e.Odcinek.ID == deleted.Odcinek.ID && e.Od_konca == deleted.Od_konca).length < 1)
+      this.sum -= deleted.Od_konca ? deleted.Odcinek.Punktacja : deleted.Odcinek.PunktacjaOdKonca
+
     this.currentPointName = deleted.Od_konca ? deleted.Odcinek.PPNazwa : deleted.Odcinek.PKNazwa
 
     setTimeout(() =>{
       this.currentSegments.paginator = this.paginator.toArray()[2];
     })
 
-    this.possibleSegments.data = await this.segmentService.searchForSegment(this.currentPointName, "").toPromise()
+    this.possibleSegments.data = await this.segmentService.searchForSegment("", this.currentPointName).toPromise()
 
     this.loaded = true
 
